@@ -20,20 +20,24 @@ var request = require("request");
 // Xử lý khi có người nhắn tin cho bot
 module.exports = (req, res) => {
   const { body } = req
-  let entries = req.body.entry;
-  for (let entry of entries) {
-    let messaging = entry.messaging;
-    for (let message of messaging) {
-      let senderId = message.sender.id;
-      if (message.message) {
-        // If user send text
-        if (message.message.text) {
-          let text = message.message.text;
-          sendMessage(senderId, "Tui là bot đây: " + text)
-        }
-      }
-    }
-  }
+  const { entry } = body
+  console.log(JSON.stringify(entry));
+  // if (entry) {
+  //   let entries = req.body.entry;
+  //   for (let entry of entries) {
+  //     let messaging = entry.messaging;
+  //     for (let message of messaging) {
+  //       let senderId = message.sender.id;
+  //       if (message.message) {
+  //         // If user send text
+  //         if (message.message.text) {
+  //           let text = message.message.text;
+  //           sendMessage(senderId, "Tui là bot đây: " + text)
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   res.status(200).send("OK");
 }
