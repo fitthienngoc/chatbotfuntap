@@ -17,12 +17,12 @@ app.use(bodyParser.urlencoded({
 var server = http.createServer(app);
 
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 
-app.get('/webhook', function(req, res) {
-  if (req.query['hub.verify_token'] === 'anh_hoang_dep_trai_vo_doi') {
+app.get('/api/webhook', function(req, res) {
+  if (req.query['hub.verify_token'] === 'anh_dep_trai_vo_doi') {
     res.send(req.query['hub.challenge']);
   }
   res.send('Error, wrong validation token');
