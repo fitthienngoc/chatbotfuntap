@@ -20,7 +20,7 @@ app.get('/api', (req, res) => {
 });
 
 // Đây là đoạn code để tạo Webhook
-app.get('/api/webhook', function(req, res) {
+app.get('/api/webhook', function (req, res) {
   if (req.query['hub.verify_token'] === 'ma_xac_minh_cua_ban') {
     res.send(req.query['hub.challenge']);
   }
@@ -28,18 +28,18 @@ app.get('/api/webhook', function(req, res) {
 });
 
 // Xử lý khi có người nhắn tin cho bot
-app.post('/api/webhook', function async (req, res) {
-  var entries = req.body.entry;
-  for (var entry of entries) {
-    var messaging = entry.messaging;
-    for (var message of messaging) {
-      var senderId = message.sender.id;
+app.post('/api/webhook', function (req, res) {
+  let entries = req.body.entry;
+  for (let entry of entries) {
+    let messaging = entry.messaging;
+    for (let message of messaging) {
+      let senderId = message.sender.id;
       if (message.message) {
         // If user send text
         if (message.message.text) {
-          var text = message.message.text;
+          let text = message.message.text;
           console.log(text); // In tin nhắn người dùng
-          await sendMessage(senderId, "Tui là bot đây: " + text);
+          () => sendMessage(senderId, "Tui là bot đây: " + text);
           console.log(senderId);
         }
       }
@@ -72,6 +72,6 @@ function sendMessage(senderId, message) {
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
 app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || "127.0.0.1");
 
-server.listen(app.get('port'), app.get('ip'), function() {
+server.listen(app.get('port'), app.get('ip'), function () {
   console.log("Chat bot server listening at %s:%d ", app.get('ip'), app.get('port'));
 });
