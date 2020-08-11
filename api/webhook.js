@@ -19,8 +19,8 @@ var request = require("request");
 
 // Xử lý khi có người nhắn tin cho bot
 module.exports = (req, res) => {
-  if (body)
-    let entries = req.body.entry;
+  const { body } = req
+  let entries = req.body.entry;
   for (let entry of entries) {
     let messaging = entry.messaging;
     for (let message of messaging) {
@@ -34,6 +34,7 @@ module.exports = (req, res) => {
       }
     }
   }
+
   res.status(200).send("OK");
 }
 
