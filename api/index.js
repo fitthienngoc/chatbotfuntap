@@ -20,7 +20,7 @@ app.get('/api', (req, res) => {
 });
 
 // Đây là đoạn code để tạo Webhook
-app.get('/api/webhook', function(req, res) {
+app.get('/api?webhook=true', function(req, res) {
   if (req.query['hub.verify_token'] === 'ma_xac_minh_cua_ban') {
     res.send(req.query['hub.challenge']);
   }
@@ -28,7 +28,7 @@ app.get('/api/webhook', function(req, res) {
 });
 
 // Xử lý khi có người nhắn tin cho bot
-app.post('/api/webhook', function(req, res) {
+app.post('/api?webhook=true', function(req, res) {
   var entries = req.body.entry;
   for (var entry of entries) {
     var messaging = entry.messaging;
