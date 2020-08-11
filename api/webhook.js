@@ -20,6 +20,7 @@ var request = require("request");
 // Xử lý khi có người nhắn tin cho bot
 app.post('/api/webhook', function (req, res) {
   console.log('xxx',req);
+  console.log('xxx@@@',res);
   //   const {body} = req
   //   const {entry} = body
   //   const {messaging} = entry
