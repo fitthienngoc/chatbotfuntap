@@ -20,40 +20,37 @@ var request = require("request");
 app.post('/api/webhook/', function (req, res) {
   messaging_events = req.body.entry[0].messaging
   for (i = 0; i < messaging_events.length; i++) {
-      event = req.body.entry[0].messaging[i]
-      sender = event.sender.id
-      if (event.message && event.message.text) {
-          text = event.message.text
-          sendMessage(sender, "Text received, echo: " + text.substring(0, 200))
-      }
+    event = req.body.entry[0].messaging[i]
+    sender = event.sender.id
+    if (event.message && event.message.text) {
+      text = event.message.text
+      sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+    }
   }
   res.sendStatus(200)
 })
 
-
+const token = "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN"
 // Gửi thông tin tới REST API để trả lời
-const sendMessage = (senderId, message) => {
-  request(
-    {
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {
-        access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
-      },
-      method: 'POST',
-      json: {
-        recipient: {
-          id: senderId
-        },
-        message: {
-          text: message
-        },
-      }
-    }),
-    (err, res, body) => {
-      if (err) { return console.log(err); }
-      console.log(body.url);
-      console.log(body.explanation);
+function sendTextMessage(sender, text) {
+  messageData = {
+    text: text
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: token },
+    method: 'POST',
+    json: {
+      recipient: { id: sender },
+      message: messageData,
     }
+  }, function (error, response, body) {
+    if (error) {
+      console.log('Error sending messages: ', error)
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
+    }
+  })
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
