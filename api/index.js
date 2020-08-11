@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
 var server = http.createServer(app);
 
 
-app.get('/api/test', (req, res) => {
+app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 
