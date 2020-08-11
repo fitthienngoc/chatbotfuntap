@@ -96,6 +96,7 @@ module.exports = (req, res) => {
 
 // Gửi thông tin tới REST API để trả lời
 const sendMessage = (senderId, message) => {
+  console.log(senderId, message);
   request(
     {
       url: 'https://graph.facebook.com/v2.6/me/messages',
