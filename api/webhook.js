@@ -39,7 +39,7 @@ app.post('/api/webhook', function (req, res) {
         if (message.message.text) {
           let text = message.message.text;
           console.log(text); // In tin nhắn người dùng
-          () => sendMessage(senderId, "Tui là bot đây: " + text);
+          sendMessage(senderId, "Tui là bot đây: " + text);
           console.log(senderId);
         }
       }
@@ -51,8 +51,8 @@ app.post('/api/webhook', function (req, res) {
 
 
 // Gửi thông tin tới REST API để trả lời
-function sendMessage(senderId, message) {
-  request({
+const sendMessage = async (senderId, message) => {
+  await request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {
       access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
