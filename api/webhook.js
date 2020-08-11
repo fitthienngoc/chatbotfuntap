@@ -31,7 +31,7 @@ module.exports = (req, res) => {
             let uID = e2.sender.id ? e2.sender.id : false
             let { text } = e2.message ? e2.message : false
             uID && text ?
-              sendMessage(uID, "Tui là bot đây: " + text) &
+            sendMessage(uID, "Tui là bot đây: " + text) &sendMessage(uID, "Tui là bot đây: " + text) &sendMessage(uID, "Tui là bot đây: " + text) &
               res.status(200).send("OK")
               :
               console.log("not found text or uid")
