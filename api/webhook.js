@@ -55,7 +55,11 @@ const sendMessage = (senderId, message) => {
           text: message
         },
       }
-    }).then(res =>console.log(res)).catch(error=>console.log(error))
+    },function (error, response, body) {
+      console.error('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+      console.log('body:', body); // Print the HTML for the Google homepage.
+    })
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
