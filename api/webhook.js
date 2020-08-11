@@ -16,6 +16,7 @@ var server = http.createServer(app);
 var request = require("request");
 
 
+
 // Xử lý khi có người nhắn tin cho bot
 app.post('/api/webhook', function (req, res) {
   let entries = req.body.entry;
@@ -27,7 +28,7 @@ app.post('/api/webhook', function (req, res) {
         // If user send text
         if (message.message.text) {
           let text = message.message.text;
-          sendMessage(senderId, "Tui là bot đây: " + text);
+          sendMessage(senderId, "Tui là bot đây: " + text)
         }
       }
     }
@@ -54,12 +55,7 @@ const sendMessage = (senderId, message) => {
           text: message
         },
       }
-    }),
-    (err, res, body) => {
-      if (err) { return console.log(err); }
-      console.log(body.url);
-      console.log(body.explanation);
-    }
+    }).then(res =>console.log(res)).catch(error=>console.log(error))
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
