@@ -15,17 +15,6 @@ app.use(bodyParser.urlencoded({
 var server = http.createServer(app);
 var request = require("request");
 
-app.get('/api', (req, res) => {
-  res.send("Home page. Server running okay.");
-});
-
-// Đây là đoạn code để tạo Webhook
-app.get('/api/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === 'ma_xac_minh_cua_ban') {
-    res.send(req.query['hub.challenge']);
-  }
-  res.send('Error, wrong validation token');
-});
 
 // Xử lý khi có người nhắn tin cho bot
 app.post('/api/webhook', function (req, res) {
