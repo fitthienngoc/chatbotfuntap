@@ -21,7 +21,7 @@ var request = require("request");
 module.exports = (req, res) => {
   const { body } = req
   const { entry } = body
-  console.log(JSON.stringify(entry));
+  console.log('AAAAAAAAAAAAAAAAAAAAAAAAAA ',JSON.stringify(entry));
   if (entry && entry.length > 0) {
     entry.map(
       (e) => {
