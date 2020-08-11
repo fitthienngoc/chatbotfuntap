@@ -21,7 +21,7 @@ var request = require("request");
 module.exports = (req, res) => {
   const { body } = req
   const { entry } = body
-  console.log('AAAAAAAAAAAAAAAAAAAAAAAAAA ',JSON.stringify(entry));
+  console.log('AAAAAAAAAAAAAAAAAAAAAAAAAA ', JSON.stringify(entry));
   if (entry && entry.length > 0) {
     entry.map(
       (e) => {
@@ -30,7 +30,13 @@ module.exports = (req, res) => {
           (e2) => {
             let uID = e2.sender.id ? e2.sender.id : false
             let { text } = e2.message ? e2.message : false
-            uID && text ? sendMessage(uID, "Tui là bot đây: " + text) : console.log("not found text or uid")
+            uID && text ?
+              sendMessage(uID, "Tui là bot đây: " + text) &
+              res.status(200).send("OK")
+              :
+              console.log("not found text or uid")
+              &
+              res.status(200).send("not found text or uid")
           }
         )
       }
@@ -54,7 +60,7 @@ module.exports = (req, res) => {
   //   }
   // }
 
-  res.status(200).send("OK");
+
 }
 
 // app.post('/api/webhook', function (req, res) {
