@@ -18,7 +18,7 @@ var request = require("request");
 
 
 // Xử lý khi có người nhắn tin cho bot
-app.get('/api/webhook', function (req, res) {
+app.post('/api/webhook', function (req, res) {
   console.log('xxx',req);
   //   const {body} = req
   //   const {entry} = body
