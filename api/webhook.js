@@ -17,40 +17,49 @@ var request = require("request");
 
 
 // Xử lý khi có người nhắn tin cho bot
-app.post('/api/webhook/', function (req, res) {
-  messaging_events = req.body.entry[0].messaging
-  for (i = 0; i < messaging_events.length; i++) {
-    event = req.body.entry[0].messaging[i]
-    sender = event.sender.id
-    if (event.message && event.message.text) {
-      text = event.message.text
-      sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+app.post('/api/webhook', function (req, res) {
+  let entries = req.body.entry;
+  for (let entry of entries) {
+    let messaging = entry.messaging;
+    for (let message of messaging) {
+      let senderId = message.sender.id;
+      if (message.message) {
+        // If user send text
+        if (message.message.text) {
+          let text = message.message.text;
+          sendMessage(senderId, "Tui là bot đây: " + text);
+        }
+      }
     }
   }
-  res.sendStatus(200)
-})
 
-const token = "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN"
+  res.status(200).send("OK");
+});
+
+
 // Gửi thông tin tới REST API để trả lời
-function sendTextMessage(sender, text) {
-  messageData = {
-    text: text
-  }
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: token },
-    method: 'POST',
-    json: {
-      recipient: { id: sender },
-      message: messageData,
+const sendMessage = (senderId, message) => {
+  request(
+    {
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {
+        access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
+      },
+      method: 'POST',
+      json: {
+        recipient: {
+          id: senderId
+        },
+        message: {
+          text: message
+        },
+      }
+    }),
+    (err, res, body) => {
+      if (err) { return console.log(err); }
+      console.log(body.url);
+      console.log(body.explanation);
     }
-  }, function (error, response, body) {
-    if (error) {
-      console.log('Error sending messages: ', error)
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error)
-    }
-  })
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
