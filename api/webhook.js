@@ -25,10 +25,10 @@ module.exports = (req, res) => {
     entry.map(
       (e) => {
         let mess = e.messaging
-        if(mess && mess.length > 0 ){
+        if (mess && mess.length > 0) {
           mess.map(
             (e2) => {
-              console.log(e2);
+              e2.message.nlp ? console.log(e2.message.nlp) : null
               res.status(200).send("OK")
               // console.log(e2.sender.id);
               // let uID = e2.sender.id ? e2.sender.id : false
@@ -43,7 +43,7 @@ module.exports = (req, res) => {
             }
           )
         }
-        
+
       }
     )
   }
@@ -81,25 +81,25 @@ module.exports = (req, res) => {
 
 
 // Gửi thông tin tới REST API để trả lời
-const sendMessage =  (senderId, message) => {
-    request(
-      {
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {
-          access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
+const sendMessage = (senderId, message) => {
+  request(
+    {
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {
+        access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
+      },
+      method: 'POST',
+      json: {
+        recipient: {
+          id: senderId
         },
-        method: 'POST',
-        json: {
-          recipient: {
-            id: senderId
-          },
-          message: {
-            text: message
-          },
-        }
-      })
-      console.log("s");
-  
+        message: {
+          text: message
+        },
+      }
+    })
+  console.log("s");
+
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
