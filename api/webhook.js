@@ -29,6 +29,7 @@ module.exports = (req, res) => {
           mess.map(
             (e2) => {
               console.log(e2);
+              res.status(200).send("OK")
               // console.log(e2.sender.id);
               // let uID = e2.sender.id ? e2.sender.id : false
               // let { text } = e2.message ? e2.message : false
