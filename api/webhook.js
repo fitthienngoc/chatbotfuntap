@@ -29,17 +29,11 @@ module.exports = (req, res) => {
           mess.map(
             (e2) => {
               if (e2.message && e2.message.nlp) {
-                let uID = e2.sender.id ? e2.sender.id : false
-                let { text } = e2.message ? e2.message : false
-                  (uID && text) ?
-                  sendMessage(uID, "Tui là bot đây: " + text) &
-                  res.status(200).send("OK")
-                  :
-                  console.log("not found text or uid")
-                  &
-                  res.status(200).send("not found text or uid")
+                console.log(e2)
+                console.log("/n");
+                res.status(200).send("OK")
               } else {
-                console.log("not user")
+                res.status(200).send("not send")
               }
 
             }
