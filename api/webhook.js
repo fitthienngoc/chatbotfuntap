@@ -31,7 +31,7 @@ module.exports = (req, res) => {
               if (e2.message && e2.message.nlp) {
                 let { id } = e2.sender
                 let { text } = e2.message
-                sendMessage(id,text)
+                console.log(id,text)
                 console.log("/n");
                 res.status(200).send("OK")
               } else {
