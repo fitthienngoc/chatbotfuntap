@@ -28,7 +28,7 @@ module.exports = (req, res) => {
         if (mess && mess.length > 0) {
           mess.map(
             (e2) => {
-              e2.message.nlp ? console.log(e2.message.nlp) : null
+              e2.message && e2.message.nlp ? console.log(e2.message.nlp) : null
               res.status(200).send("OK")
               // console.log(e2.sender.id);
               // let uID = e2.sender.id ? e2.sender.id : false
