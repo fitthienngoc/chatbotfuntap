@@ -34,7 +34,7 @@ module.exports = (req, res) => {
             console.log(id, text)
             console.log("/n");
             if (id && text) {
-              async () => await sendMessage(senderId, "Tui là bot đây: " + text)
+              sendMessage(senderId, "Tui là bot đây: " + text)
             }
             console.log("/n");
             res.status(200).send("OK")
@@ -81,8 +81,8 @@ module.exports = (req, res) => {
 
 
 // Gửi thông tin tới REST API để trả lời
-const sendMessage = (senderId, message) => {
-  request(
+const sendMessage = async (senderId, message) => {
+  await request(
     {
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {
@@ -98,7 +98,7 @@ const sendMessage = (senderId, message) => {
         },
       }
     })
-  console.log("s");
+  console.log("Send");
 
 }
 
