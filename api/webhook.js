@@ -33,8 +33,8 @@ module.exports = (req, res) => {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
           console.log(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
-          if (element2.sender && element2.sender.id !== 2414697648796646)
-            {sendTextMessage(2248424415276865, 'messDefault')}
+          sendTextMessage(element2.sender.id, element2.message.text)
+          
           // sendTextMessage(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
           // if (element2.message && element2.message.nlp) {
           //   let { id } = element2.sender
