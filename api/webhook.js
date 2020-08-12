@@ -84,15 +84,15 @@ const token = "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS
 // Gửi thông tin tới REST API để trả lời
 function sendTextMessage(id, text) {
   messageData = {
-    text: text
+    "text": text
   }
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: token },
+    qs: { "access_token": token },
     method: 'POST',
     json: {
-      recipient: { id },
-      message: messageData,
+      "recipient": { "id": id },
+      "message": messageData,
     }
   }, function (error, response, body) {
     if (error) {
