@@ -32,7 +32,7 @@ module.exports = (req, res) => {
       if (mess && mess.length > 0) {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
-          console.log(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
+          
           sendTextMessage(element2.sender ? element2.sender.id : false,element2.message ? element2.message.text : false)
           
           // sendTextMessage(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
@@ -85,6 +85,7 @@ module.exports = (req, res) => {
 
 // Gửi thông tin tới REST API để trả lời
 function sendTextMessage(id, text) {
+  console.log(id,text);
   if (id && text) {
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
