@@ -29,6 +29,7 @@ module.exports = (req, res) => {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
           console.log('Nhan',element2)
+          sendTextMessage()
           // if (element2.message && element2.message.nlp) {
           //   let { id } = element2.sender
           //   let { text } = element2.message
