@@ -87,12 +87,12 @@ function sendTextMessage(id, text) {
     "text": text
   }
   request({
-    "url": 'https://graph.facebook.com/v2.6/me/messages',
-    "qs": { "access_token": token },
-    "method": 'POST',
-    "json": {
-      "recipient": { "id": id },
-      "message": messageData,
+    "url": 'https://graph.facebook.com/v2.6/me/messages?access_token=EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN',
+    "recipient": {
+      "id": "2248424415276865"
+    },
+    "message": {
+      "text": "message"
     }
   }, function (error, response, body) {
     if (error) {
