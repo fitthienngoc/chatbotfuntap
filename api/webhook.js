@@ -32,12 +32,13 @@ module.exports = (req, res) => {
             let { id } = element2.sender
             let { text } = element2.message
             console.log(id, text)
-           
+
             if (id && text) {
-              sendTextMessage(id, "Tui là bot đây: " + text)
+              let sendZ = async () => await sendTextMessage(id, "Tui là bot đây: " + text)
+              res.status(200).send(sendZ)
             }
-            
-            res.status(200).send("OK")
+
+
           } else {
             res.status(200).send("not send")
           }
@@ -95,9 +96,9 @@ function sendTextMessage(id, text) {
     }
   }, function (error, response, body) {
     if (error) {
-      console.log('Error sending messages: ', error)
+      return error
     } else if (response.body.error) {
-      console.log('Error: ', response.body.error)
+      return response.body.error
     }
   })
 }
