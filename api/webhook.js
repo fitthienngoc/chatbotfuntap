@@ -22,7 +22,7 @@ module.exports = (req, res) => {
   if (req.query['hub.verify_token'] === 'ma_xac_minh_cua_ban') {
     res.send(req.query['hub.challenge']);
   }
-  
+
   let { body } = req
   let { entry } = body
   if (entry && entry.length > 0) {
@@ -32,7 +32,7 @@ module.exports = (req, res) => {
       if (mess && mess.length > 0) {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
-
+          console.log(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
           sendTextMessage(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
           // if (element2.message && element2.message.nlp) {
           //   let { id } = element2.sender
