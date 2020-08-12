@@ -87,10 +87,10 @@ function sendTextMessage(id, text) {
     "text": text
   }
   request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { "access_token": token },
-    method: 'POST',
-    json: {
+    "url": 'https://graph.facebook.com/v2.6/me/messages',
+    "qs": { "access_token": token },
+    "method": 'POST',
+    "json": {
       "recipient": { "id": id },
       "message": messageData,
     }
