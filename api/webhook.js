@@ -19,6 +19,10 @@ var request = require("request");
 
 // Xử lý khi có người nhắn tin cho bot
 module.exports = (req, res) => {
+  if (req.query['hub.verify_token'] === 'ma_xac_minh_cua_ban') {
+    res.send(req.query['hub.challenge']);
+  }
+  
   let { body } = req
   let { entry } = body
   if (entry && entry.length > 0) {
