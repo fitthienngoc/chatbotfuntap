@@ -33,7 +33,8 @@ module.exports = (req, res) => {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
           console.log(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
-          sendTextMessage(2248424415276865,'messDefault')
+          if (element2.sender && element2.sender.id !== 2414697648796646)
+            sendTextMessage(2248424415276865, 'messDefault')
           // sendTextMessage(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
           // if (element2.message && element2.message.nlp) {
           //   let { id } = element2.sender
@@ -41,13 +42,13 @@ module.exports = (req, res) => {
           //   console.log(id, text)
           //   let sendZ = sendTextMessage(id, "Tui là bot đây: " + text)
           // } else {
-            //   res.status(200).send("not send")
-            // }
-          }
+          //   res.status(200).send("not send")
+          // }
         }
       }
     }
-    res.status(200).send('ok')
+  }
+  res.status(200).send('ok')
 }
 
 
@@ -101,7 +102,7 @@ function sendTextMessage(id, text) {
       }
     });
   }
-  else{
+  else {
     console.log('not found id text');
   }
 }
