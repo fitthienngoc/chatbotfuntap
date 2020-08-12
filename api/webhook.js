@@ -32,13 +32,8 @@ module.exports = (req, res) => {
             let { id } = element2.sender
             let { text } = element2.message
             console.log(id, text)
-
-            if (id && text) {
-              let sendZ = sendTextMessage(id, "Tui là bot đây: " + text)
-              res.status(200).send(sendZ)
-            }
-
-
+            let sendZ = sendTextMessage(id, "Tui là bot đây: " + text)
+            res.status(200).send(sendZ)
           } else {
             res.status(200).send("not send")
           }
