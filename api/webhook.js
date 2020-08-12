@@ -96,6 +96,9 @@ function sendTextMessage(id, text) {
       }
     });
   }
+  else{
+    console.log('not found id text');
+  }
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
