@@ -32,9 +32,9 @@ module.exports = (req, res) => {
       if (mess && mess.length > 0) {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
-          
-          sendTextMessage(element2.sender ? element2.sender.id : false,element2.message ? element2.message.text : false)
-          
+
+          sendTextMessage(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
+
           // sendTextMessage(element2.sender ? element2.sender.id : false, element2.message ? element2.message.text : false)
           // if (element2.message && element2.message.nlp) {
           //   let { id } = element2.sender
@@ -85,23 +85,36 @@ module.exports = (req, res) => {
 
 // Gửi thông tin tới REST API để trả lời
 function sendTextMessage(id, text) {
-  console.log(id,text);
+  console.log(id, text);
   if (id && text) {
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {
-        access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
-      },
-      method: 'POST',
-      json: {
-        recipient: {
-          id: id
+    request(
+      {
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {
+          access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
         },
-        message: {
-          text: text
-        },
+        method: 'POST',
+        json: {
+          recipient: {
+            id: id
+          },
+          message: {
+            text: text
+          },
+        }
       }
-    });
+      , function (error, response, body) {
+        if (error) {
+          console.log('Error sending messages: ', error)
+        }
+        if (response.body) {
+          console.log('Response: ', response)
+        }
+        if (body) {
+          console.log('Body: ', body)
+        }
+      }
+    );
   }
   else {
     console.log('not found id text');
