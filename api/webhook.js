@@ -24,7 +24,6 @@ module.exports = (req, res) => {
   if (entry && entry.length > 0) {
     for (let index = 0; index < entry.length; index++) {
       let element = entry[index];
-
       let mess = element.messaging
       if (mess && mess.length > 0) {
         for (let i_ = 0; i_ < mess.length; i_++) {
@@ -44,13 +43,11 @@ module.exports = (req, res) => {
           }
         }
       }
-
     }
   }
 }
 
-}
-}
+
 
 // app.post('/api/webhook', function (req, res) {
 //   console.log('xxx', req);
