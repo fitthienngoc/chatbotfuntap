@@ -28,8 +28,8 @@ module.exports = (req, res) => {
       if (mess && mess.length > 0) {
         for (let i_ = 0; i_ < mess.length; i_++) {
           let element2 = mess[i_];
-          console.log('Nhan',element2)
-          sendTextMessage()
+          
+          sendTextMessage(element2.sender.id,element2.message.text)
           // if (element2.message && element2.message.nlp) {
           //   let { id } = element2.sender
           //   let { text } = element2.message
@@ -87,10 +87,10 @@ function sendTextMessage(id, text) {
     method: 'POST',
     json: {
       recipient: {
-        id: 2248424415276865
+        id: id
       },
       message: {
-        text: 'message'
+        text: text
       },
     }
   });
