@@ -22,45 +22,30 @@ module.exports = (req, res) => {
   const { body } = req
   const { entry } = body
   console.log('AAAAAAAAAAAAAAAAAAAAAAAAAA ', JSON.stringify(entry));
-  if (entry && entry.length > 0) {
-    entry.map(
-      (e) => {
-        let mess = e.messaging
-        mess && mess.length > 0 && mess.map(
-          (e2) => {
-            let uID = e2.sender.id ? e2.sender.id : false
-            let { text } = e2.message ? e2.message : false
-            uID && text ?
-            sendMessage(uID, "Tui là bot đây: " + text) &sendMessage(uID, "Tui là bot đây: " + text) &sendMessage(uID, "Tui là bot đây: " + text) &
-              res.status(200).send("OK")
-              :
-              console.log("not found text or uid")
-              &
-              res.status(200).send("not found text or uid")
-          }
-        )
-      }
-    )
-  }
-
-  // if (entry) {
-  //   let entries = req.body.entry;
-  //   for (let entry of entries) {
-  //     let messaging = entry.messaging;
-  //     for (let message of messaging) {
-  //       let senderId = message.sender.id;
-  //       if (message.message) {
-  //         // If user send text
-  //         if (message.message.text) {
-  //           let text = message.message.text;
-  // sendMessage(senderId, "Tui là bot đây: " + text)
-  //         }
+  // if (entry && entry.length > 0) {
+  //   entry.map(
+  //     (e) => {
+  //       let mess = e.messaging
+  //       if(mess && mess.length > 0 ){
+  //         mess.map(
+  //           (e2) => {
+  //             console.log(e2.sender.id);
+  //             let uID = e2.sender.id ? e2.sender.id : false
+  //             let { text } = e2.message ? e2.message : false
+  //             (uID && text) ?
+  //             sendMessage(uID, "Tui là bot đây: " + text) &
+  //               res.status(200).send("OK")
+  //               :
+  //               console.log("not found text or uid")
+  //               &
+  //               res.status(200).send("not found text or uid")
+  //           }
+  //         )
   //       }
+        
   //     }
-  //   }
+  //   )
   // }
-
-
 }
 
 // app.post('/api/webhook', function (req, res) {
@@ -96,8 +81,7 @@ module.exports = (req, res) => {
 
 // Gửi thông tin tới REST API để trả lời
 const sendMessage =  (senderId, message) => {
-  const send = async ()=>{
-     const req =  await request(
+    request(
       {
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {
@@ -113,9 +97,8 @@ const sendMessage =  (senderId, message) => {
           },
         }
       })
-      console.log(req);
-  }
-  send();
+      console.log("s");
+  
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
