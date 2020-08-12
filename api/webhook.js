@@ -35,9 +35,9 @@ module.exports = (req, res) => {
             console.log("/n");
             if (id && text) {
               sendMessage(id, "Tui là bot đây: " + text).then(
-                (res) => console.log(res)
+                console.log("send")
               ).catch(
-                (err) => console.log(err)
+                console.log("error send")
               )
             }
             console.log("/n");
@@ -87,7 +87,7 @@ module.exports = (req, res) => {
 // Gửi thông tin tới REST API để trả lời
 const sendMessage = async (senderId, message) => {
   await request(
-    ({
+    {
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {
         access_token: "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN",
@@ -101,9 +101,7 @@ const sendMessage = async (senderId, message) => {
           text: message
         },
       }
-    }, (res) => {
-      return res
-    }))
+    })
 }
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
