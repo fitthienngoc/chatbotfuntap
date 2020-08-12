@@ -19,36 +19,37 @@ var request = require("request");
 
 // Xử lý khi có người nhắn tin cho bot
 module.exports = (req, res) => {
-  const { body } = req
-  const { entry } = body
+  let { body } = req
+  let { entry } = body
   if (entry && entry.length > 0) {
-    entry.map(
-      (e) => {
-        let mess = e.messaging
-        if (mess && mess.length > 0) {
-          mess.map(
-            (e2) => {
-              if (e2.message && e2.message.nlp) {
-                let { id } = e2.sender
-                let { text } = e2.message
-                console.log(id, text)
-                console.log("/n");
-                if (id && text) {
-                  sendMessage(senderId, "Tui là bot đây: " + text)
-                }
-                console.log("/n");
-                res.status(200).send("OK")
-              } else {
-                res.status(200).send("not send")
-              }
+    for (let index = 0; index < entry.length; index++) {
+      let element = entry[index];
 
+      let mess = element.messaging
+      if (mess && mess.length > 0) {
+        for (let i_ = 0; i_ < mess.length; i_++) {
+          let element2 = mess[i_];
+          if (element2.message && element2.message.nlp) {
+            let { id } = element2.sender
+            let { text } = element2.message
+            console.log(id, text)
+            console.log("/n");
+            if (id && text) {
+              async () => await sendMessage(senderId, "Tui là bot đây: " + text)
             }
-          )
+            console.log("/n");
+            res.status(200).send("OK")
+          } else {
+            res.status(200).send("not send")
+          }
         }
-
       }
-    )
+
+    }
   }
+}
+
+}
 }
 
 // app.post('/api/webhook', function (req, res) {
