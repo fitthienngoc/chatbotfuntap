@@ -29,7 +29,9 @@ module.exports = (req, res) => {
           mess.map(
             (e2) => {
               if (e2.message && e2.message.nlp) {
-                console.log(e2)
+                let { id } = e2.sender
+                let { text } = e2.message
+                sendMessage(id,text)
                 console.log("/n");
                 res.status(200).send("OK")
               } else {
