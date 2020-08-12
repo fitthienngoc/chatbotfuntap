@@ -34,7 +34,7 @@ module.exports = (req, res) => {
             console.log(id, text)
             console.log("/n");
             if (id && text) {
-              sendMessage(senderId, "Tui là bot đây: " + text).then(
+              sendMessage(id, "Tui là bot đây: " + text).then(
                 (res) => console.log(res)
               ).catch(
                 (err) => console.log(err)
