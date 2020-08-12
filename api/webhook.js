@@ -21,31 +21,31 @@ var request = require("request");
 module.exports = (req, res) => {
   const { body } = req
   const { entry } = body
-  console.log('AAAAAAAAAAAAAAAAAAAAAAAAAA ', JSON.stringify(entry));
-  // if (entry && entry.length > 0) {
-  //   entry.map(
-  //     (e) => {
-  //       let mess = e.messaging
-  //       if(mess && mess.length > 0 ){
-  //         mess.map(
-  //           (e2) => {
-  //             console.log(e2.sender.id);
-  //             let uID = e2.sender.id ? e2.sender.id : false
-  //             let { text } = e2.message ? e2.message : false
-  //             (uID && text) ?
-  //             sendMessage(uID, "Tui là bot đây: " + text) &
-  //               res.status(200).send("OK")
-  //               :
-  //               console.log("not found text or uid")
-  //               &
-  //               res.status(200).send("not found text or uid")
-  //           }
-  //         )
-  //       }
+  if (entry && entry.length > 0) {
+    entry.map(
+      (e) => {
+        let mess = e.messaging
+        if(mess && mess.length > 0 ){
+          mess.map(
+            (e2) => {
+              console.log(e2);
+              // console.log(e2.sender.id);
+              // let uID = e2.sender.id ? e2.sender.id : false
+              // let { text } = e2.message ? e2.message : false
+              // (uID && text) ?
+              // sendMessage(uID, "Tui là bot đây: " + text) &
+              //   res.status(200).send("OK")
+              //   :
+              //   console.log("not found text or uid")
+              //   &
+              //   res.status(200).send("not found text or uid")
+            }
+          )
+        }
         
-  //     }
-  //   )
-  // }
+      }
+    )
+  }
 }
 
 // app.post('/api/webhook', function (req, res) {
