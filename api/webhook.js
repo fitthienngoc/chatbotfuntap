@@ -34,7 +34,7 @@ module.exports = (req, res) => {
             console.log(id, text)
 
             if (id && text) {
-              let sendZ = async () => await sendTextMessage(id, "Tui là bot đây: " + text)
+              let sendZ = sendTextMessage(id, "Tui là bot đây: " + text)
               res.status(200).send(sendZ)
             }
 
@@ -80,7 +80,6 @@ module.exports = (req, res) => {
 //   // res.status(200).send("OK");
 // });
 
-const token = "EAAsHu2amnGsBACaZAIUs2iHQ4WU8XX6Y3R4PsDnPj8YfKmY5tNK4zumZCprU2CbS7bjAZAtkIF2ZAvFS99vZCTbW3UeWnDpf50M5egBRnPUsOSvXYMIRZClEvdIk4ZC0hEo6QVQFwQ1H90OkvLQDfuEqMZAB36fVxtsPtbVZCAZACsZBQ5310fUzGpN"
 // Gửi thông tin tới REST API để trả lời
 function sendTextMessage(id, text) {
   messageData = {
